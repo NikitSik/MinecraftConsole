@@ -1,0 +1,5 @@
+E:\Проекты\Mincraft\obj\Debug\net8.0\MinecraftConsole.GeneratedMSBuildEditorConfig.editorconfig
+E:\Проекты\Mincraft\obj\Debug\net8.0\MinecraftConsole.AssemblyInfoInputs.cache
+E:\Проекты\Mincraft\obj\Debug\net8.0\MinecraftConsole.AssemblyInfo.cs
+E:\Проекты\Mincraft\obj\Debug\net8.0\MinecraftConsole.csproj.CoreCompileInputs.cache
+E:\Проекты\Mincraft\obj\Debug\net8.0\MinecraftConsole.sourcelink.json
