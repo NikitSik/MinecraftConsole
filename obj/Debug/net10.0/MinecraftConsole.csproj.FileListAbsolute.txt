@@ -1,0 +1,15 @@
+E:\Проекты\Mincraft\bin\Debug\net10.0\MinecraftConsole.exe
+E:\Проекты\Mincraft\bin\Debug\net10.0\MinecraftConsole.deps.json
+E:\Проекты\Mincraft\bin\Debug\net10.0\MinecraftConsole.runtimeconfig.json
+E:\Проекты\Mincraft\bin\Debug\net10.0\MinecraftConsole.dll
+E:\Проекты\Mincraft\bin\Debug\net10.0\MinecraftConsole.pdb
+E:\Проекты\Mincraft\obj\Debug\net10.0\MinecraftConsole.GeneratedMSBuildEditorConfig.editorconfig
+E:\Проекты\Mincraft\obj\Debug\net10.0\MinecraftConsole.AssemblyInfoInputs.cache
+E:\Проекты\Mincraft\obj\Debug\net10.0\MinecraftConsole.AssemblyInfo.cs
+E:\Проекты\Mincraft\obj\Debug\net10.0\MinecraftConsole.csproj.CoreCompileInputs.cache
+E:\Проекты\Mincraft\obj\Debug\net10.0\MinecraftConsole.sourcelink.json
+E:\Проекты\Mincraft\obj\Debug\net10.0\MinecraftConsole.dll
+E:\Проекты\Mincraft\obj\Debug\net10.0\refint\MinecraftConsole.dll
+E:\Проекты\Mincraft\obj\Debug\net10.0\MinecraftConsole.pdb
+E:\Проекты\Mincraft\obj\Debug\net10.0\MinecraftConsole.genruntimeconfig.cache
+E:\Проекты\Mincraft\obj\Debug\net10.0\ref\MinecraftConsole.dll
