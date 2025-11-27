@@ -3,18 +3,25 @@ using System.Numerics;
 namespace MinecraftConsole;
 
 /// <summary>
-/// Handles gravity, acceleration and collisions for the player.
+/// Отвечает за гравитацию, ускорение и разрешение коллизий игрока с блоками.
 /// </summary>
 public static class Physics
 {
+    /// <summary>Ускорение свободного падения.</summary>
     private const float Gravity = -18f;
+    /// <summary>Скорость, с которой горизонтальная скорость приближается к желаемой.</summary>
     private const float Acceleration = 18f;
+    /// <summary>Затухание скорости в воздухе.</summary>
     private const float AirFriction = 0.9f;
+    /// <summary>Затухание скорости на земле.</summary>
     private const float GroundFriction = 0.7f;
 
+    /// <summary>
+    /// Выполняет один физический шаг: применяет силы и корректирует положение.
+    /// </summary>
     public static void Step(Player player, InputHandler input, World world, float deltaTime)
     {
-        // Horizontal acceleration based on input
+        // Горизонтальное ускорение на основе ввода
         if (input.DesiredMove != Vector3.Zero)
         {
             float speed = input.Sprint ? 10f : 6f;
@@ -28,27 +35,28 @@ public static class Physics
             player.Velocity *= player.OnGround ? GroundFriction : AirFriction;
         }
 
-        // Gravity
+        // Гравитация
         player.Velocity += new Vector3(0f, Gravity * deltaTime, 0f);
 
         player.OnGround = false;
         Vector3 position = player.Position;
 
-        // Move along X
+        // Перемещение по каждой оси с отдельной проверкой столкновений
         Vector3 attempt = position + new Vector3(player.Velocity.X * deltaTime, 0f, 0f);
         position = ResolveAxis(player, position, attempt, world, axis: 0);
 
-        // Move along Z
         attempt = position + new Vector3(0f, 0f, player.Velocity.Z * deltaTime);
         position = ResolveAxis(player, position, attempt, world, axis: 2);
 
-        // Move along Y
         attempt = position + new Vector3(0f, player.Velocity.Y * deltaTime, 0f);
         position = ResolveAxis(player, position, attempt, world, axis: 1);
 
         player.Position = position;
     }
 
+    /// <summary>
+    /// Разрешает коллизию при движении по одной оси, возвращая скорректированную позицию.
+    /// </summary>
     private static Vector3 ResolveAxis(Player player, Vector3 originalPos, Vector3 desiredPos, World world, int axis)
     {
         Vector3 minDesired = new(desiredPos.X - Player.Radius, desiredPos.Y, desiredPos.Z - Player.Radius);
@@ -102,6 +110,9 @@ public static class Physics
         return resolved;
     }
 
+    /// <summary>
+    /// Проверяет, пересекает ли капсула игрока блок по координатам блока.
+    /// </summary>
     private static bool Intersects(Vector3 desiredPos, int bx, int by, int bz)
     {
         float minX = desiredPos.X - Player.Radius;

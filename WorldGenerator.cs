@@ -1,17 +1,22 @@
 namespace MinecraftConsole;
 
 /// <summary>
-/// Builds a simple layered height-map based world using deterministic noise.
+/// Создаёт простой мир на основе синусоидального шума и фиксированного сидирования.
 /// </summary>
 public class WorldGenerator
 {
+    /// <summary>Источник псевдослучайных чисел для разнообразия ландшафта.</summary>
     private readonly Random _random;
 
+    /// <summary>Создаёт генератор с конкретным сидом, чтобы мир можно было повторить.</summary>
     public WorldGenerator(int seed)
     {
         _random = new Random(seed);
     }
 
+    /// <summary>
+    /// Заполняет мир слоями камня, земли и травы, создавая холмистую местность.
+    /// </summary>
     public void Populate(World world)
     {
         for (int x = 0; x < World.Width; x++)
@@ -28,6 +33,9 @@ public class WorldGenerator
         }
     }
 
+    /// <summary>
+    /// Вычисляет высоту террейна по координатам, комбинируя плавные волны и небольшие детали.
+    /// </summary>
     private int ComputeHeight(int x, int z)
     {
         double nx = x / 12.0;

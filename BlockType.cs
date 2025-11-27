@@ -1,7 +1,7 @@
 namespace MinecraftConsole;
 
 /// <summary>
-/// Enumeration of all available block types in the world.
+/// Все доступные типы блоков, которые могут находиться в мире.
 /// </summary>
 public enum BlockType
 {

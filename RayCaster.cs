@@ -4,19 +4,25 @@ using System.Text;
 namespace MinecraftConsole;
 
 /// <summary>
-/// Simple console ray-caster that turns the voxel world into vertical columns of ASCII symbols.
+/// Простейший трассировщик лучей, рисующий столбцы символов в консоли.
 /// </summary>
 public class RayCaster
 {
+    /// <summary>Ширина виртуального экрана в символах.</summary>
     public const int ScreenWidth = 120;
+    /// <summary>Высота виртуального экрана в символах.</summary>
     public const int ScreenHeight = 40;
+    /// <summary>Поле зрения камеры в радианах.</summary>
     public const float FieldOfView = 70f * (float)Math.PI / 180f;
+    /// <summary>Максимальная дистанция трассировки лучей.</summary>
     public const float MaxRenderDistance = 32f;
 
+    /// <summary>Двумерный буфер символов текущего кадра.</summary>
     private readonly char[,] _buffer = new char[ScreenHeight, ScreenWidth];
 
-    public char[,] Buffer => _buffer;
-
+    /// <summary>
+    /// Выполняет рендер кадра и определяет блок, на который смотрит игрок.
+    /// </summary>
     public void Render(World world, Player player, out BlockType? targetBlock)
     {
         for (int y = 0; y < ScreenHeight; y++)
@@ -47,9 +53,12 @@ public class RayCaster
         }
     }
 
+    /// <summary>
+    /// Ищет ближайший непрозрачный блок вдоль луча и возвращает расстояние до него.
+    /// </summary>
     private static float Cast(World world, Vector3 origin, Vector3 direction, out BlockType hit)
     {
-        float step = 0.1f;
+        const float step = 0.1f;
         for (float d = 0f; d < MaxRenderDistance; d += step)
         {
             Vector3 point = origin + direction * d;
@@ -68,6 +77,9 @@ public class RayCaster
         return MaxRenderDistance;
     }
 
+    /// <summary>
+    /// Рисует вертикальный столбец блока с учётом расстояния и наклона камеры.
+    /// </summary>
     private void DrawColumn(int column, float distance, BlockType block, float pitch)
     {
         float projectionHeight = ScreenHeight / (distance + 0.0001f);
@@ -94,6 +106,9 @@ public class RayCaster
         }
     }
 
+    /// <summary>
+    /// Заполняет столбец небом и землёй, если луч ничего не задел.
+    /// </summary>
     private void DrawSkyAndGround(int column, float pitch)
     {
         int horizon = ScreenHeight / 2 - (int)(pitch * ScreenHeight * 0.4f);
@@ -103,6 +118,9 @@ public class RayCaster
         }
     }
 
+    /// <summary>
+    /// Выбирает символ в зависимости от типа блока и дальности, имитируя затухание.
+    /// </summary>
     private static char Shade(BlockType block, float distance)
     {
         char symbol = block switch
@@ -123,6 +141,9 @@ public class RayCaster
         return '.';
     }
 
+    /// <summary>
+    /// Собирает буфер символов в единую строку, добавляя HUD в конце.
+    /// </summary>
     public string ComposeFrame(string hud)
     {
         StringBuilder sb = new(ScreenHeight * (ScreenWidth + 1));

@@ -5,19 +5,29 @@ using System.Text;
 namespace MinecraftConsole;
 
 /// <summary>
-/// Coordinates initialization, the main loop, updates and rendering.
+/// Управляет жизненным циклом игры: загрузкой, обработкой ввода, обновлением и выводом на экран.
 /// </summary>
 public class Game
 {
+    /// <summary>Путь к сохранённому миру на диске.</summary>
     private const string SavePath = "world.save";
-    private const int FrameTimeMs = 33; // ~30 FPS
+    /// <summary>Желаемое время кадра в миллисекундах (~30 FPS).</summary>
+    private const int FrameTimeMs = 33;
 
+    /// <summary>Текущий игрок, за которого управляет пользователь.</summary>
     private readonly Player _player = new();
+    /// <summary>Компонент, читающий нажатия клавиш и превращающий их в команды.</summary>
     private readonly InputHandler _input = new();
+    /// <summary>Простейший консольный рендерер, выполняющий трассировку лучей.</summary>
     private readonly RayCaster _rayCaster = new();
+    /// <summary>Ответственен за сохранение и загрузку мира.</summary>
     private readonly SaveSystem _saveSystem = new();
+    /// <summary>Игровой мир, содержащий блоки и чанки.</summary>
     private World _world = new();
 
+    /// <summary>
+    /// Запускает главный цикл, пока пользователь не попросит выйти.
+    /// </summary>
     public void Run()
     {
         Console.CursorVisible = false;
@@ -53,6 +63,9 @@ public class Game
         Console.CursorVisible = true;
     }
 
+    /// <summary>
+    /// Загружает ранее сохранённый мир или создаёт новый, если сохранение отсутствует.
+    /// </summary>
     private void LoadOrGenerateWorld()
     {
         World? loaded = _saveSystem.LoadWorld(SavePath);
@@ -68,10 +81,13 @@ public class Game
         }
     }
 
+    /// <summary>
+    /// Спрашивает пользователя о сохранении перед выходом и прекращает работу цикла.
+    /// </summary>
     private bool HandleExit()
     {
         Console.SetCursorPosition(0, RayCaster.ScreenHeight + 1);
-        Console.Write("Save world before exiting? (Y/N): ");
+        Console.Write("Сохранить мир перед выходом? (Y/N): ");
         ConsoleKey key = Console.ReadKey(true).Key;
         if (key == ConsoleKey.Y)
         {
@@ -80,6 +96,9 @@ public class Game
         return true;
     }
 
+    /// <summary>
+    /// Обрабатывает ломание и установку блоков в направлении взгляда игрока.
+    /// </summary>
     private void HandleInteraction()
     {
         (Vector3? hitPos, Vector3? placePos) = RayPick(_player.Position, _player.Yaw, _player.Pitch);
@@ -93,6 +112,9 @@ public class Game
         }
     }
 
+    /// <summary>
+    /// Ищет блок, в который смотрит игрок, и позицию для установки нового блока рядом.
+    /// </summary>
     private (Vector3? hitBlock, Vector3? placePosition) RayPick(Vector3 origin, float yaw, float pitch)
     {
         Vector3 direction = new(
@@ -117,11 +139,14 @@ public class Game
         return (null, null);
     }
 
+    /// <summary>
+    /// Формирует текст с координатами игрока и подсказками по управлению.
+    /// </summary>
     private string BuildHud(BlockType? target)
     {
         Vector3 pos = _player.Position;
         string targetText = target?.ToString() ?? "None";
-        string controls = "WASD: move | Arrows: look | Space: jump | Shift: sprint | E: break | Q: place | Esc: exit";
+        string controls = "WASD: движение | Стрелки: взгляд | Space: прыжок | Shift: бег | E: ломать | Q: ставить | Esc: выход";
         return $"Pos: {pos.X:F1},{pos.Y:F1},{pos.Z:F1}  Block: {targetText}  {controls}\n";
     }
 }

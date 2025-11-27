@@ -1,10 +1,13 @@
 namespace MinecraftConsole;
 
 /// <summary>
-/// Serializes the world to a compact binary format so play sessions can resume later.
+/// Отвечает за бинарное сохранение и загрузку игрового мира на диск.
 /// </summary>
 public class SaveSystem
 {
+    /// <summary>
+    /// Сохраняет состояние мира в файл. Формат: размеры, затем байт на каждый блок.
+    /// </summary>
     public void SaveWorld(World world, string path)
     {
         using FileStream stream = new(path, FileMode.Create, FileAccess.Write);
@@ -18,6 +21,9 @@ public class SaveSystem
         }
     }
 
+    /// <summary>
+    /// Загружает мир из файла. Если формат или размеры не совпадают, возвращает null.
+    /// </summary>
     public World? LoadWorld(string path)
     {
         if (!File.Exists(path)) return null;

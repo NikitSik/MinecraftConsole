@@ -1,9 +1,9 @@
 # MinecraftConsole
 
-Simple console-based voxel engine inspired by Minecraft. Requires only the .NET SDK (net8.0).
+Simple console-based voxel engine inspired by Minecraft. Requires only the .NET SDK (net10.0).
 
 ## Prerequisites
-- .NET 8 SDK installed (verify with `dotnet --version`).
+- .NET 10 SDK installed (verify with `dotnet --version`, expected `10.0.100` or newer preview).
 - A terminal that supports ANSI cursor positioning (Windows Terminal, macOS/Linux terminals, or PowerShell 7+).
 
 ## Running
@@ -15,7 +15,7 @@ dotnet build   # compile to ensure everything is ready
 dotnet run     # launch the game
 ```
 
-If `dotnet` is unavailable in your environment, install the .NET 8 SDK from https://dotnet.microsoft.com/download.
+If `dotnet` is unavailable in your environment, install the .NET 10 SDK from https://dotnet.microsoft.com/download/dotnet/10.0.
 
 ## Controls
 - **W/A/S/D**: Move forward/left/back/right

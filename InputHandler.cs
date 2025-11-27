@@ -3,16 +3,24 @@ using System.Numerics;
 namespace MinecraftConsole;
 
 /// <summary>
-/// Polls Console input and produces movement, look and action commands.
+/// Считывает нажатия клавиш и формирует команды для движения и взаимодействия.
 /// </summary>
 public class InputHandler
 {
+    /// <summary>Флаг запроса выхода из игры.</summary>
     public bool ExitRequested { get; private set; }
+    /// <summary>Флаг запроса разрушения блока перед игроком.</summary>
     public bool BreakRequested { get; private set; }
+    /// <summary>Флаг запроса установки нового блока перед игроком.</summary>
     public bool PlaceRequested { get; private set; }
+    /// <summary>Нормализованный вектор желаемого движения по плоскости XZ.</summary>
     public Vector3 DesiredMove { get; private set; }
+    /// <summary>Активирован ли бег (Shift).</summary>
     public bool Sprint { get; private set; }
 
+    /// <summary>
+    /// Обрабатывает все нажатия, накопившиеся в буфере консоли, и обновляет состояние игрока.
+    /// </summary>
     public void ProcessInput(Player player)
     {
         ExitRequested = false;
@@ -31,6 +39,7 @@ public class InputHandler
             {
                 Sprint = true;
             }
+
             switch (key.Key)
             {
                 case ConsoleKey.Escape:
@@ -72,10 +81,6 @@ public class InputHandler
                         player.Velocity = new Vector3(player.Velocity.X, 6.5f, player.Velocity.Z);
                         player.OnGround = false;
                     }
-                    break;
-                case ConsoleKey.LeftShift:
-                case ConsoleKey.RightShift:
-                    Sprint = true;
                     break;
             }
         }
