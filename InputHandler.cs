@@ -27,14 +27,10 @@ public class InputHandler
         while (Console.KeyAvailable)
         {
             ConsoleKeyInfo key = Console.ReadKey(true);
-<<<<<<< ours
-=======
             if (key.Modifiers.HasFlag(ConsoleModifiers.Shift))
             {
                 Sprint = true;
             }
-
->>>>>>> theirs
             switch (key.Key)
             {
                 case ConsoleKey.Escape:
@@ -77,13 +73,10 @@ public class InputHandler
                         player.OnGround = false;
                     }
                     break;
-<<<<<<< ours
                 case ConsoleKey.LeftShift:
                 case ConsoleKey.RightShift:
                     Sprint = true;
                     break;
-=======
->>>>>>> theirs
             }
         }
 

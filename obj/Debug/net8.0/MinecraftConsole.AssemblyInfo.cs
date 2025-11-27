@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MinecraftConsole")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ed98cfc65bce177884a4cda91b2c2854654c1bf8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+87233d6b7aac7ddd4120d119a2296c11eacce27e")]
 [assembly: System.Reflection.AssemblyProductAttribute("MinecraftConsole")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MinecraftConsole")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
